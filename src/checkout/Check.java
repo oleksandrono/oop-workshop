@@ -8,16 +8,24 @@ public class Check {
     private List<Offer> offers = new ArrayList<>();
     private int points = 0;
 
+    private int totalCost = 0;
+
     public int getTotalCost() {
-        int totalCost = 0;
-        for (Product product : this.products) {
-            totalCost += product.price;
-        }
         return totalCost;
     }
 
+    void discount(int DiscountAmount){
+        totalCost -= DiscountAmount;
+    }
+
+    List<Product> getProducts(){
+        return products;
+    }
+
+
     void addProduct(Product product) {
         products.add(product);
+        totalCost += product.price;
     }
 
     public int getTotalPoints() {
@@ -38,7 +46,8 @@ public class Check {
                 .reduce(0, (a, b) -> a + b);
     }
 
-    public void useOffers() {
+
+    void useOffers() {
         for (Offer offer:offers) {
             offer.apply(this);
         }

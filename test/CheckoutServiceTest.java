@@ -12,6 +12,7 @@ public class CheckoutServiceTest {
     private Product milk_7;
     private CheckoutService checkoutService;
     private Product bred_3;
+    private Product water_4;
 
     @BeforeEach
     void setUp() {
@@ -19,7 +20,8 @@ public class CheckoutServiceTest {
         checkoutService.openCheck();
 
         milk_7 = new Product(7, "Milk", Category.MILK);
-        bred_3 = new Product(3, "Bred");
+        bred_3 = new Product(3, "Bred", Category.BRED);
+        water_4 = new Product(4, "Water", Category.WATER);
     }
 
     @Test
@@ -127,6 +129,23 @@ public class CheckoutServiceTest {
         Check check = checkoutService.closeCheck();
 
         assertThat(check.getTotalPoints(), is(19));
+    }
+
+
+    @Test
+    void useOffer__offerByCategory(){
+
+        checkoutService.addProduct(water_4);
+        checkoutService.useOffer(new DiscountByCategory(Category.WATER, LocalDate.of(2019, 7, 10)));
+        checkoutService.addProduct(milk_7);
+        checkoutService.addProduct(bred_3);
+
+
+
+        Check check = checkoutService.closeCheck();
+
+        assertThat(check.getTotalPoints(), is(12));
+        assertThat(check.getTotalCost(), is(12));
     }
 
 

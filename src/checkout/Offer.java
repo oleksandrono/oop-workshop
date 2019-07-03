@@ -13,7 +13,7 @@ public abstract class Offer {
     }
 
 
-    public boolean expiredDateMethod(){
+    public boolean checkExpiryDate(){
         if(expiredDate.isAfter(LocalDate.now())){
             return true;
         }

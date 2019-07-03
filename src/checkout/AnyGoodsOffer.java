@@ -16,7 +16,7 @@ public class AnyGoodsOffer extends Offer {
 
     @Override
     public void apply(Check check) {
-        if(expiredDateMethod()){
+        if(checkExpiryDate()){
             if (this.totalCost <= check.getTotalCost()) {
                 check.addPoints(this.points);
             }

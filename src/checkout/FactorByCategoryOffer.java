@@ -16,7 +16,7 @@ public class FactorByCategoryOffer extends Offer {
 
     @Override
     public void apply(Check check) {
-        if(expiredDateMethod()) {
+        if(checkExpiryDate()) {
             int points = check.getCostByCategory(this.category);
             check.addPoints(points * (this.factor - 1));
         }
