@@ -2,6 +2,8 @@ import checkout.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -62,7 +64,7 @@ public class CheckoutServiceTest {
         checkoutService.addProduct(milk_7);
         checkoutService.addProduct(bred_3);
 
-        checkoutService.useOffer(new AnyGoodsOffer(6, 2));
+        checkoutService.useOffer(new AnyGoodsOffer(6, 2, LocalDate.of(2019, 7, 10)));
         Check check = checkoutService.closeCheck();
 
         assertThat(check.getTotalPoints(), is(12));
@@ -72,7 +74,7 @@ public class CheckoutServiceTest {
     void useOffer__whenCostLessThanRequired__doNothing() {
         checkoutService.addProduct(bred_3);
 
-        checkoutService.useOffer(new AnyGoodsOffer(6, 2));
+        checkoutService.useOffer(new AnyGoodsOffer(6, 2, LocalDate.of(2019, 7, 10)));
         Check check = checkoutService.closeCheck();
 
         assertThat(check.getTotalPoints(), is(3));
@@ -84,7 +86,7 @@ public class CheckoutServiceTest {
         checkoutService.addProduct(milk_7);
         checkoutService.addProduct(bred_3);
 
-        checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2));
+        checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 10)));
         Check check = checkoutService.closeCheck();
 
         assertThat(check.getTotalPoints(), is(31));
@@ -92,15 +94,41 @@ public class CheckoutServiceTest {
 
     @Test
     void useOffer__beforeAddProduct(){
-        checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2));
         checkoutService.addProduct(milk_7);
-        checkoutService.addProduct(milk_7);
+        checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 10)));
         checkoutService.addProduct(bred_3);
+        checkoutService.addProduct(milk_7);
 
         Check check = checkoutService.closeCheck();
 
         assertThat(check.getTotalPoints(), is(31));
     }
+
+    @Test
+    void useOffer__checkExpirationDate__whenDateNormal(){
+        checkoutService.addProduct(milk_7);
+        checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 10)));
+        checkoutService.addProduct(bred_3);
+        checkoutService.addProduct(milk_7);
+
+        Check check = checkoutService.closeCheck();
+
+        assertThat(check.getTotalPoints(), is(31));
+    }
+
+    @Test
+    void useOffer__checkExpirationDate__whenDateNotNormalInOneOffer(){
+        checkoutService.addProduct(milk_7);
+        checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 1)));
+        checkoutService.addProduct(bred_3);
+        checkoutService.useOffer(new AnyGoodsOffer(6, 2, LocalDate.of(2019, 7, 10)));
+        checkoutService.addProduct(milk_7);
+
+        Check check = checkoutService.closeCheck();
+
+        assertThat(check.getTotalPoints(), is(19));
+    }
+
 
 
 }

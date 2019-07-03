@@ -1,11 +1,24 @@
 package checkout;
 
+import java.time.LocalDate;
+
 public abstract class Offer {
+
+    public final LocalDate expiredDate;
 
     public abstract void apply(Check check);
 
-
-    public void isActual(){
-
+    public Offer(LocalDate expiredDate){
+        this.expiredDate = expiredDate;
     }
+
+
+    public boolean expiredDateMethod(){
+        if(expiredDate.isAfter(LocalDate.now())){
+            return true;
+        }
+        return false;
+    }
+
+
 }

@@ -26,4 +26,6 @@ public class CheckoutService {
     public void useOffer(Offer offer) {
         check.addOffer(offer);
     }
+
+
 }
