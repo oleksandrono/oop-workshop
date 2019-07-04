@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Check {
     private List<Product> products = new ArrayList<>();
-    private List<Offer> offers = new ArrayList<>();
     private int points = 0;
 
     private int totalCost = 0;
@@ -36,16 +35,6 @@ public class Check {
         this.points += points;
     }
 
-    void addOffer(Offer offer) {
-        offers.add(offer);
-    }
-
-
-    void useOffers() {
-        for (Offer offer : offers) {
-            offer.apply(this);
-        }
-    }
 
 
     int getCostByCategory(Category category) {

@@ -4,18 +4,24 @@ import java.time.LocalDate;
 
 public abstract class Offer {
 
+    private LocalDate expirationDate;
 
-    public Offer(LocalDate expirationDate) {
-        isActual();
+    Offer(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
-    public Offer() {
-
+    void useSuitableOffer(Check check) {
+        if (this.checkExpirationDate() && isValid(check)) {
+            apply(check);
+        }
     }
 
-    abstract boolean isActual();
 
     public abstract void apply(Check check);
 
+    public abstract boolean isValid(Check check);
 
+    private boolean checkExpirationDate() {
+        return expirationDate.isAfter(LocalDate.now());
+    }
 }

@@ -1,8 +1,13 @@
 package checkout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CheckoutService {
 
     private Check check;
+
+    private List<Offer> offers = new ArrayList<>();
 
     public void openCheck() {
         check = new Check();
@@ -16,16 +21,21 @@ public class CheckoutService {
     }
 
     public Check closeCheck() {
-        check.useOffers();
+        for(Offer offer : offers){
+            offer.useSuitableOffer(check);
+        }
 
         Check closedCheck = check;
         check = null;
         return closedCheck;
     }
 
-    public void useOffer(Offer offer) {
-        check.addOffer(offer);
+    void addOffer(Offer offer) {
+        offers.add(offer);
     }
 
+    public void useOffer(Offer offer) {
+        addOffer(offer);
+    }
 
 }

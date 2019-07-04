@@ -1,31 +1,36 @@
 package checkout;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class FactorByCategoryOffer extends Offer {
-    public final Category category;
-    public final int factor;
-    private LocalDate expirationDate;
+    private final Category category;
+    private final int factor;
 
     public FactorByCategoryOffer(Category category, int factor, LocalDate expirationDate) {
-        super();
+        super(expirationDate);
         this.category = category;
         this.factor = factor;
-        this.expirationDate = expirationDate;
     }
 
-    @Override
-    boolean isActual() {
-        return expirationDate.isAfter(LocalDate.now());
-    }
 
     @Override
     public void apply(Check check) {
-        if (isActual()) {
-            int points = check.getCostByCategory(this.category);
-            check.addPoints(points * (this.factor - 1));
-        } else {
-            check.addPoints(0);
-        }
+        int points = check.getCostByCategory(this.category);
+        check.addPoints(points * (this.factor - 1));
+
     }
+
+    @Override
+    public boolean isValid(Check check) {
+        List<Product> products = check.getProducts();
+        for(Product p : products){
+            if(p.category==this.category){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }
