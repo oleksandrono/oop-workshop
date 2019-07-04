@@ -24,8 +24,8 @@ public class FactorByCategoryOffer extends Offer {
     @Override
     public boolean isValid(Check check) {
         List<Product> products = check.getProducts();
-        for(Product p : products){
-            if(p.category==this.category){
+        for (Product p : products) {
+            if (p.category == this.category) {
                 return true;
             }
         }

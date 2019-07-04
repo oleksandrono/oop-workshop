@@ -10,7 +10,6 @@ public class OfferByTrademark extends Offer {
     private final int points;
 
 
-
     public OfferByTrademark(Trademark trademark, int count, int points, LocalDate expirationDate) {
         super(expirationDate);
         this.trademark = trademark;
@@ -34,10 +33,7 @@ public class OfferByTrademark extends Offer {
                 suitableProducts.add(p);
             }
         }
-        if (suitableProducts.size() >= this.count) {
-            return true;
-        }
-        return false;
+        return suitableProducts.size() >= this.count;
 
     }
 

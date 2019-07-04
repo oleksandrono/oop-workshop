@@ -4,10 +4,18 @@ import java.time.LocalDate;
 
 public abstract class Offer {
 
+    private Condition condition;
     private LocalDate expirationDate;
 
-    Offer(LocalDate expirationDate) {
+    public Offer(Condition condition, LocalDate expirationDate){
+        this.condition = condition;
         this.expirationDate = expirationDate;
+    }
+
+
+    public Offer(LocalDate expirationDate) {
+        this(null, expirationDate);
+
     }
 
     void useSuitableOffer(Check check) {
