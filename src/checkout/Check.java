@@ -14,11 +14,11 @@ public class Check {
         return totalCost;
     }
 
-    void discount(int DiscountAmount){
+    void discount(int DiscountAmount) {
         totalCost -= DiscountAmount;
     }
 
-    List<Product> getProducts(){
+    List<Product> getProducts() {
         return products;
     }
 
@@ -35,9 +35,18 @@ public class Check {
     void addPoints(int points) {
         this.points += points;
     }
-    void addOffer(Offer offer){
+
+    void addOffer(Offer offer) {
         offers.add(offer);
     }
+
+
+    void useOffers() {
+        for (Offer offer : offers) {
+            offer.apply(this);
+        }
+    }
+
 
     int getCostByCategory(Category category) {
         return products.stream()
@@ -46,10 +55,4 @@ public class Check {
                 .reduce(0, (a, b) -> a + b);
     }
 
-
-    void useOffers() {
-        for (Offer offer:offers) {
-            offer.apply(this);
-        }
-    }
 }

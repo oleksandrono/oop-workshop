@@ -95,7 +95,7 @@ public class CheckoutServiceTest {
     }
 
     @Test
-    void useOffer__beforeAddProduct(){
+    void useOffer__beforeAddProduct() {
         checkoutService.addProduct(milk_7);
         checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 10)));
         checkoutService.addProduct(bred_3);
@@ -107,7 +107,7 @@ public class CheckoutServiceTest {
     }
 
     @Test
-    void useOffer__checkExpirationDate__whenDateNormal(){
+    void useOffer__checkExpirationDate__whenDateNormal() {
         checkoutService.addProduct(milk_7);
         checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 10)));
         checkoutService.addProduct(bred_3);
@@ -119,7 +119,7 @@ public class CheckoutServiceTest {
     }
 
     @Test
-    void useOffer__checkExpirationDate__whenDateNotNormalInOneOffer(){
+    void useOffer__checkExpirationDate__whenDateNotNormalInOneOffer() {
         checkoutService.addProduct(milk_7);
         checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2, LocalDate.of(2019, 7, 1)));
         checkoutService.addProduct(bred_3);
@@ -133,14 +133,12 @@ public class CheckoutServiceTest {
 
 
     @Test
-    void useOffer__offerByCategory(){
+    void useOffer__discountByCategory() {
 
         checkoutService.addProduct(water_4);
-        checkoutService.useOffer(new DiscountByCategory(Category.WATER, LocalDate.of(2019, 7, 10)));
+        checkoutService.useOffer(new DiscountByCategory(Category.WATER, 50, LocalDate.of(2019, 7, 10)));
         checkoutService.addProduct(milk_7);
         checkoutService.addProduct(bred_3);
-
-
 
         Check check = checkoutService.closeCheck();
 
@@ -148,6 +146,19 @@ public class CheckoutServiceTest {
         assertThat(check.getTotalCost(), is(12));
     }
 
+    @Test
+    void useOffer__offerByTrademark() {
+
+        milk_7 = new Product(7, "Milk", Trademark.VOLOSHKOVE_POLE);
+        checkoutService.useOffer(new OfferByTrademark(Trademark.VOLOSHKOVE_POLE, 2, 5, LocalDate.of(2019, 7, 10)));
+        checkoutService.addProduct(milk_7);
+        checkoutService.addProduct(milk_7);
+        checkoutService.addProduct(bred_3);
+
+        Check check = checkoutService.closeCheck();
+
+        assertThat(check.getTotalPoints(), is(22));
+    }
 
 
 }
