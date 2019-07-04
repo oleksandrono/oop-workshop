@@ -165,7 +165,7 @@ public class CheckoutServiceTest {
 
 
     @Test
-    void useOffer__testingConditionWithFlatReward() {
+    void useOffer__BonusOffer__allConditionWithFlatReward() {
 
         milk_7 = new Product(7, "Milk", Trademark.VOLOSHKOVE_POLE);
 
@@ -187,18 +187,42 @@ public class CheckoutServiceTest {
 
 
     @Test
-    void useOffer__testingConditionWithFactorReward() {
+    void useOffer__BonusOffer__allConditionWithFactorReward() {
         bred_3 = new Product(3, "Bred", Trademark.FORMULA_SMAKU);
-
+        milk_7 = new Product(7, "Milk", Category.MILK, Trademark.VOLOSHKOVE_POLE);
 
         checkoutService.useOffer(new BonusOffer((new ByTrademarkCondition(Trademark.FORMULA_SMAKU, 2)), (new FactorReward(Trademark.FORMULA_SMAKU, 2)), suitableDate));
 
         checkoutService.addProduct(bred_3);
         checkoutService.addProduct(bred_3);
+
         checkoutService.addProduct(milk_7);
+        checkoutService.useOffer(new BonusOffer((new ByCategoryCondition(Category.MILK)), (new FactorReward(Trademark.VOLOSHKOVE_POLE, 2)), suitableDate));
 
         Check check = checkoutService.closeCheck();
 
-        assertThat(check.getTotalPoints(), is(19));
+        assertThat(check.getTotalPoints(), is(26));
+    }
+
+    @Test
+    void useOffer__DiscountOffer__allConditionWithFlatReward(){
+
+        water_4 = new Product(4, "Water", Category.WATER, Trademark.MORSHINSKA);
+        milk_7 = new Product(7, "Milk", Category.MILK, Trademark.VOLOSHKOVE_POLE);
+        Product bred_10 = new Product(10, "Bred", Category.BRED, Trademark.FORMULA_SMAKU);
+
+        checkoutService.useOffer(new DiscountOffer((new ByTrademarkCondition(Trademark.MORSHINSKA, 2)), (new PercentDiscount(Trademark.MORSHINSKA, 50)), suitableDate));
+        checkoutService.addProduct(water_4);
+        checkoutService.addProduct(water_4);
+
+        checkoutService.useOffer(new DiscountOffer((new ByCategoryCondition(Category.MILK)), (new PercentDiscount(50)), suitableDate));
+        checkoutService.addProduct(milk_7);
+        checkoutService.addProduct(bred_10);
+
+        checkoutService.useOffer(new DiscountOffer((new TotalCostCondition(10)), (new PercentDiscount(50)), suitableDate));
+
+        Check check = checkoutService.closeCheck();
+
+        assertThat(check.getTotalPoints(), is(13));
     }
 }

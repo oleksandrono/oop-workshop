@@ -27,7 +27,7 @@ public class DiscountByCategory extends Offer {
                 double priceFactor = p.price;
                 double totalDiscount = discountFactor * priceFactor;
                 int result = (int) totalDiscount;
-                check.discount(result);
+                check.applyDiscount(result);
             }
         }
 

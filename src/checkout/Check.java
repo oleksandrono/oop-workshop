@@ -13,7 +13,7 @@ public class Check {
         return totalCost;
     }
 
-    void discount(int DiscountAmount) {
+    void applyDiscount(int DiscountAmount) {
         totalCost -= DiscountAmount;
     }
 
