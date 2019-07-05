@@ -1,4 +1,4 @@
-package checkout;
+package checkout.offer.discount;
 
 public class Discount {
 

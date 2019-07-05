@@ -1,4 +1,8 @@
-package checkout;
+package checkout.offer.bonus;
+
+import checkout.Category;
+import checkout.Check;
+import checkout.Trademark;
 
 public class FactorReward implements Reward {
 

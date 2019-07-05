@@ -1,4 +1,7 @@
-package checkout;
+package checkout.offer;
+
+import checkout.Check;
+import checkout.offer.conditions.Condition;
 
 import java.time.LocalDate;
 
@@ -18,7 +21,7 @@ public abstract class Offer {
 
     }
 
-    void useSuitableOffer(Check check) {
+    public void useSuitableOffer(Check check) {
         if (this.checkExpirationDate() && isValid(check)) {
             apply(check);
         }

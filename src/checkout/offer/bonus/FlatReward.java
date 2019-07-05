@@ -1,4 +1,6 @@
-package checkout;
+package checkout.offer.bonus;
+
+import checkout.Check;
 
 public class FlatReward implements Reward {
 

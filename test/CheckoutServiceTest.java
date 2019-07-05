@@ -1,4 +1,12 @@
 import checkout.*;
+import checkout.offer.bonus.BonusOffer;
+import checkout.offer.bonus.FactorReward;
+import checkout.offer.bonus.FlatReward;
+import checkout.offer.conditions.ByCategoryCondition;
+import checkout.offer.conditions.ByTrademarkCondition;
+import checkout.offer.conditions.TotalCostCondition;
+import checkout.offer.discount.DiscountOffer;
+import checkout.offer.discount.PercentDiscount;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -225,4 +233,5 @@ public class CheckoutServiceTest {
 
         assertThat(check.getTotalPoints(), is(13));
     }
+
 }

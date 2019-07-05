@@ -13,11 +13,11 @@ public class Check {
         return totalCost;
     }
 
-    void applyDiscount(int DiscountAmount) {
+    public void applyDiscount(int DiscountAmount) {
         totalCost -= DiscountAmount;
     }
 
-    List<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
@@ -31,27 +31,27 @@ public class Check {
         return getTotalCost() + points;
     }
 
-    void addPoints(int points) {
+    public void addPoints(int points) {
         this.points += points;
     }
 
 
 
-    int getCostByCategory(Category category) {
+    public int getCostByCategory(Category category) {
         return products.stream()
                 .filter(p -> p.category == category)
                 .mapToInt(p -> p.price)
                 .reduce(0, (a, b) -> a + b);
     }
 
-    int getCostByTrademark(Trademark trademark){
+    public int getCostByTrademark(Trademark trademark){
         return products.stream()
                 .filter(p -> p.trademark == trademark)
                 .mapToInt(p -> p.price)
                 .reduce(0, (a, b) -> a + b);
     }
 
-    int getCountProductsByTrademark(Trademark trademark){
+    public int getCountProductsByTrademark(Trademark trademark){
         int count = 0;
         for(Product p : products){
             if(p.trademark==trademark){

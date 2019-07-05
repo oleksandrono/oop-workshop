@@ -1,5 +1,8 @@
-package checkout;
+package checkout.offer.conditions;
 
+
+import checkout.Check;
+import checkout.Trademark;
 
 public class ByTrademarkCondition implements Condition {
 

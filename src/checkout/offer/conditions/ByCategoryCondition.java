@@ -1,4 +1,8 @@
-package checkout;
+package checkout.offer.conditions;
+
+import checkout.Category;
+import checkout.Check;
+import checkout.Product;
 
 import java.util.List;
 

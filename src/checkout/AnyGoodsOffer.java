@@ -1,5 +1,7 @@
 package checkout;
 
+import checkout.offer.Offer;
+
 import java.time.LocalDate;
 
 public class AnyGoodsOffer extends Offer {

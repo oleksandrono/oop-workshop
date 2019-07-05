@@ -1,4 +1,6 @@
-package checkout;
+package checkout.offer.conditions;
+
+import checkout.Check;
 
 public class TotalCostCondition implements Condition {
 

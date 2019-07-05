@@ -1,4 +1,8 @@
-package checkout;
+package checkout.offer.bonus;
+
+import checkout.Check;
+import checkout.offer.conditions.Condition;
+import checkout.offer.Offer;
 
 import java.time.LocalDate;
 

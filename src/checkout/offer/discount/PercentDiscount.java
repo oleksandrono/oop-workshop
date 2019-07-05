@@ -1,7 +1,11 @@
-package checkout;
+package checkout.offer.discount;
+
+import checkout.Category;
+import checkout.Check;
+import checkout.Product;
+import checkout.Trademark;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class PercentDiscount implements DiscountRule {
 
@@ -50,7 +54,6 @@ public class PercentDiscount implements DiscountRule {
             }
 
         }
-        System.out.println(amountDiscount);
         return new Discount(amountDiscount);
     }
 }
