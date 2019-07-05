@@ -13,21 +13,21 @@ public class PercentDiscount implements DiscountRule {
     private final Category category;
     private final Trademark trademark;
 
-    public PercentDiscount(Category category, Trademark trademark, int discountPercent){
+    public PercentDiscount(Category category, Trademark trademark, int discountPercent) {
         this.category = category;
         this.trademark = trademark;
         this.discountPercent = discountPercent;
     }
 
-    public PercentDiscount(Category category, int discountPercent){
+    public PercentDiscount(Category category, int discountPercent) {
         this(category, null, discountPercent);
     }
 
-    public PercentDiscount (Trademark trademark, int discountPercent){
+    public PercentDiscount(Trademark trademark, int discountPercent) {
         this(null, trademark, discountPercent);
     }
 
-    public PercentDiscount(int discountPercent){
+    public PercentDiscount(int discountPercent) {
         this(null, null, discountPercent);
     }
 
@@ -41,14 +41,12 @@ public class PercentDiscount implements DiscountRule {
                     double totalDiscount = ((double) discountPercent / 100) * (double) p.price;
                     amountDiscount = (int) totalDiscount;
                 }
-            }
-            else if(trademark!=null){
+            } else if (trademark != null) {
                 if (p.trademark == trademark) {
                     double totalDiscount = ((double) discountPercent / 100) * (double) p.price;
                     amountDiscount = (int) totalDiscount;
                 }
-            }
-            else {
+            } else {
                 double totalDiscount = ((double) discountPercent / 100) * (double) p.price;
                 amountDiscount = (int) totalDiscount;
             }

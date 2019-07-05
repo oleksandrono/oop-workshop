@@ -213,7 +213,7 @@ public class CheckoutServiceTest {
     }
 
     @Test
-    void useOffer__DiscountOffer__allConditionWithFlatReward(){
+    void useOffer__DiscountOffer__allConditionWithFlatReward() {
 
         water_4 = new Product(4, "Water", Category.WATER, Trademark.MORSHINSKA);
         milk_7 = new Product(7, "Milk", Category.MILK, Trademark.VOLOSHKOVE_POLE);

@@ -10,7 +10,7 @@ public class ByCategoryCondition implements Condition {
 
     private final Category category;
 
-    public ByCategoryCondition(Category category){
+    public ByCategoryCondition(Category category) {
         this.category = category;
     }
 

@@ -11,7 +11,7 @@ public class BonusOffer extends Offer {
     private final Condition condition;
     private Reward reward;
 
-    public BonusOffer(Condition condition, Reward reward, LocalDate expirationDate){
+    public BonusOffer(Condition condition, Reward reward, LocalDate expirationDate) {
         super(condition, expirationDate);
         this.condition = condition;
         this.reward = reward;

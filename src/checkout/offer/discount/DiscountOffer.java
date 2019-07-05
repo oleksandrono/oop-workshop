@@ -11,7 +11,7 @@ public class DiscountOffer extends Offer {
     private final DiscountRule discount;
     private final Condition condition;
 
-    public DiscountOffer(Condition condition, DiscountRule discount, LocalDate expirationDate){
+    public DiscountOffer(Condition condition, DiscountRule discount, LocalDate expirationDate) {
         super(condition, expirationDate);
         this.discount = discount;
         this.condition = condition;
